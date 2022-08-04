@@ -51,12 +51,19 @@ const getNoteByIdHandler = (request, h) => {
       },
     };
   }
+
+  const response = h.response({
+    status: "fail",
+    message: "Catatan tidak ditemukan",
+  });
+  response.code(404);
+  return response;
 };
 
 const editNoteByIdHandler = (Request, h) => {
   const { id } = Request.params;
 
-  const { title, tag, bodu } = request.payload;
+  const { title, tags, body } = Request.payload;
   const updatedAt = new Date().toISOString();
 
   const index = notes.findIndex((note) => note.id === id);
